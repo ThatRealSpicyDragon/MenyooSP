@@ -819,60 +819,61 @@ namespace BlipColour {
 class GTAblip final
 {
 public:
-	friend bool operator == (const GTAblip& left, const GTAblip& right);
-	friend bool operator != (const GTAblip& left, const GTAblip& right);
-	GTAblip& operator = (const GTAblip& right);
+    // Existing friend operators and constructors
+    friend bool operator == (const GTAblip& left, const GTAblip& right);
+    friend bool operator != (const GTAblip& left, const GTAblip& right);
+    GTAblip& operator = (const GTAblip& right);
 
-	GTAblip();
-	GTAblip(int handle);
+    GTAblip();
+    GTAblip(int handle);
 
-	int& Handle();
+    // Existing getter and setter functions
+    int& Handle();
+    uint8_t Alpha() const;
+    void SetAlpha(uint8_t value);
 
-	uint8_t Alpha() const;
-	void SetAlpha(uint8_t value);
+    int Colour() const;
+    void SetColour(int value);
 
-	int Colour() const;
-	void SetColour(int value);
+    bool IsFlashing() const;
+    void SetFlashing(bool value);
 
-	bool IsFlashing() const;
-	void SetFlashing(bool value);
+    void SetFriendly(bool value);
 
-	void SetFriendly(bool value);
+    bool IsOnMinimap() const;
 
-	bool IsOnMinimap() const;
+    bool IsShortRange() const;
+    void SetShortRange(bool value);
 
-	bool IsShortRange() const;
-	void SetShortRange(bool value);
+    Vector3 Position_get() const;
+    void Position_set(const Vector3& value);
 
-	Vector3 Position_get() const;
-	void Position_set(const Vector3& value);
+    void Rotation_set(float value);
 
-	void Rotation_set(float value);
+    void SetScale(float value);
 
-	void SetScale(float value);
+    void ShowRoute(bool value);
 
-	void ShowRoute(bool value);
+    int Icon() const;
+    void SetIcon(int value);
 
-	int Icon() const;
-	void SetIcon(int value);
+    std::string IconName() const;
 
-	std::string IconName() const;
+    void SetBlipName(const std::string& value);
 
-	void SetBlipName(const std::string& value);
+    int Type() const;
 
-	int Type() const;
+    void HideNumber();
+    void ShowNumber(int number);
 
-	void HideNumber();
-	void ShowNumber(int number);
+    bool Exists() const;
+    void Remove();
 
-	bool Exists() const;
-	void Remove();
+    // New functions for controlling blip rotation
+    void SetRotateWithEntity(bool value);  // Toggle blip rotation with entity
+    bool RotateWithEntity() const;         // Check if blip rotates with entity
 
 private:
-	int mHandle;
+    int mHandle;
+    bool mRotateWithEntity = false;  // New flag for entity-based rotation
 };
-
-
-
-
-
