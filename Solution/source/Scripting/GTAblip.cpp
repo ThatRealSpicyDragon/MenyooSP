@@ -799,9 +799,24 @@ void GTAblip::Position_set(const Vector3& value)
 	SET_BLIP_COORDS(this->mHandle, value.x, value.y, value.z);
 }
 
+void GTAblip::SetRotateWithEntity(bool value)
+{
+    mRotateWithEntity = value;  // Enable or disable entity-based rotation
+}
+
+bool GTAblip::RotateWithEntity() const
+{
+    return mRotateWithEntity;  // Check if the blip should rotate with the entity
+}
+
 void GTAblip::Rotation_set(float valueInDegrees)
 {
-	SET_BLIP_ROTATION(this->mHandle, valueInDegrees);
+    if (mRotateWithEntity)
+    {
+        // Set the rotation to match the entity's yaw (Z-axis rotation)
+        SET_BLIP_ROTATION(this->mHandle, valueInDegrees);
+    }
+    // If not rotating with the entity, no action is needed here (let the blip rotate with the mini-map)
 }
 
 void GTAblip::SetScale(float value)
